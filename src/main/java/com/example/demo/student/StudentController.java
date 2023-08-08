@@ -2,6 +2,8 @@ package com.example.demo.student;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,9 +16,17 @@ public class StudentController {
     public StudentController(StudentService studentService) {
         this.studentService = studentService;
     }
-    @GetMapping()
+    @GetMapping() // this is the GET method
     public List<Student> getStudents() {
         return studentService.getStudents();
     }
+    @PostMapping // this is the POST method
+    public void addStudent(@RequestBody Student student) { // we take the student from the request body and map it
+        studentService.addNewStudent(student);
+    }
+
+
+
+
     }
 

@@ -1,13 +1,9 @@
 package com.example.demo.student;
 
 import java.time.LocalDate;
+import java.time.Period;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.SequenceGenerator;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table
@@ -21,42 +17,38 @@ public class Student {
     private Long id;
     private String name;
     private LocalDate dob;
-    private Integer age;
     private String email;
+    @Transient // makes the age 
+    private Integer age;
 
     public Student() {
     }
 
-    public Student(Long id, String name, LocalDate dob, Integer age, String email) {
+    public Student(Long id, String name, LocalDate dob,  String email) {
         this.id = id;
         this.name = name;
         this.dob = dob;
-        this.age = age;
+       
         this.email = email;
     }
 
-    public Student(Long id, String name, Integer age, String email) {
+    public Student(Long id, String name,  String email) {
         this.id = id;
         this.name = name;
-        this.age = age;
+
         this.email = email;
     }
 
-    public Student(String name, Integer age, String email) {
+    public Student(String name, String email) {
         this.name = name;
-        this.age = age;
+
         this.email = email;
     }
 
-    public Student(String name, LocalDate dob, Integer age) {
+   
+    public Student(String name, LocalDate dob, String email) {
         this.name = name;
         this.dob = dob;
-        this.age = age;
-    }
-    public Student(String name, LocalDate dob, Integer age, String email) {
-        this.name = name;
-        this.dob = dob;
-        this.age = age;
         this.email = email;
     }
 
@@ -74,7 +66,8 @@ public class Student {
     }
 
     public Integer getAge() {
-        return age;
+
+        return Period.between(this.dob, LocalDate.now()).getYears();
     }
 
     public String getEmail() {
