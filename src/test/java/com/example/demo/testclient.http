@@ -1,3 +1,4 @@
+### Test Case 1: Default Constructor
 POST http://localhost:8080/api/v1/student
 Content-Type: application/json
 
@@ -5,4 +6,73 @@ Content-Type: application/json
     "name": "Bilal",
     "email": "bilal@gmail.com",
     "dob": "1995-12-17"
+}
+
+### Test Case 2: Parameterized Constructor
+POST http://localhost:8080/api/v1/student
+Content-Type: application/json
+
+{
+    "name": "Bilal",
+    "email": "bilal@gmail.com",
+    "dob": "1995-12-17"
+}
+
+### Test Case 3: Additional Payload
+POST http://localhost:8080/api/v1/student
+Content-Type: application/json
+
+{
+    "name": "Alice",
+    "email": "alice@example.com",
+    "dob": "1993-08-25"
+}
+
+### Test Case 4: Different Email
+POST http://localhost:8080/api/v1/student
+Content-Type: application/json
+
+{
+    "name": "Charlie",
+    "email": "charlie@gmail.com",
+    "dob": "1998-03-12"
+}
+
+### Test Case 5: Another Constructor
+POST http://localhost:8080/api/v1/student
+Content-Type: application/json
+
+{
+    "name": "David",
+    "email": "david@example.com",
+    "dob": "1990-06-01"
+}
+
+### Test Case 6: Different Name
+POST http://localhost:8080/api/v1/student
+Content-Type: application/json
+
+{
+    "name": "Eleanor",
+    "email": "eleanor@example.com",
+    "dob": "2000-11-30"
+}
+
+### Test Case 7: Different DOB
+POST http://localhost:8080/api/v1/student
+Content-Type: application/json
+
+{
+    "name": "George",
+    "email": "george@example.com",
+    "dob": "1987-05-19"
+}
+
+### Test Case 8: Missing Name
+POST http://localhost:8080/api/v1/student
+Content-Type: application/json
+
+{
+    "email": "hannah@example.com",
+    "dob": "1997-02-28"
 }
