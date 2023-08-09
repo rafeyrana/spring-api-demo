@@ -2,9 +2,11 @@ package com.example.demo.student;
 
 import java.util.Optional;
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class StudentService {
@@ -41,4 +43,25 @@ public class StudentService {
         studentRepository.deleteById(studentId);
 
     }
+
+    
+    @Transactional // when we have this the entities will be in a managed state and we can update them directly
+    public void updateStudent(Long studentId, String name, String email) {
+        Student student = studentRepository.findById(studentId)
+                .orElseThrow(() -> new IllegalStateException("This id does not exist"));
+
+        if (name != null && name.length() > 0 && !Objects.equals(student.getName(), name)) {
+            student.setName(name);
+        }
+
+        if (email != null && email.length() > 0 && !Objects.equals(student.getEmail(), email)) {
+            Optional<Student> studentOptional = studentRepository.findStudentByEmail(email);
+            if (studentOptional.isPresent()) {
+                throw new IllegalStateException("The email: " + email + " already exists");
+            }
+
+            student.setEmail(email);
+        }
+    }
+
 }

@@ -2,13 +2,7 @@ package com.example.demo.student;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 // here we will keep all the resources here
 @RestController
@@ -31,9 +25,19 @@ public class StudentController {
         studentService.addNewStudent(student);
     }
 
-    @DeleteMapping(path = "{studentId}") // Corrected path // this is the DELETE method
+    @DeleteMapping(path = "{studentId}") // this is the DELETE method
     public void removeStudent(@PathVariable("studentId") Long studentId) {
         studentService.removeStudent(studentId);
     }
+    @PutMapping(path = "{studentId}") // this is the PUT method
+    public void updateStudent(
+        @PathVariable("studentId") Long studentId,
+        @RequestParam(required = false) String name,
+        @RequestParam(required = false) String email
+    )
+    {
+        studentService.updateStudent(studentId, name, email);
+    }
+
 
 }
